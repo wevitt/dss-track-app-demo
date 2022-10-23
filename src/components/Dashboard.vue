@@ -1,8 +1,9 @@
 <script setup lang="ts">
   import { useApi } from '../composable/useApi'
-  import { reactive, ref } from 'vue'
+  import { ref } from 'vue'
 
   const api = useApi()
+  const veichles = ref([])
 
   const getCookie = (cname: string): string =>  {
     let name = cname + "=";
@@ -34,5 +35,6 @@
 <template>
   <div>
     <button type="button" @click="fetchVeichles">Lista veicoli</button>
+    {{ veichles }}
   </div>
 </template>
