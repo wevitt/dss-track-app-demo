@@ -13,7 +13,7 @@ const api = useApi()
 const doLogin = async () => {
   const loginData = await api.post('Auth/Login', {...credentials}, { headers: {}}).catch(e => console.log(e))
   console.log(loginData)
-  window.history.pushState({}, '', '/#/dashboard')
+  window.history.pushState({}, '', '/dss-track-app-demo/#/dashboard')
   window.dispatchEvent(new HashChangeEvent("hashchange"))
 }
 
