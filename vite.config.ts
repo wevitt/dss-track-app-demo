@@ -7,11 +7,12 @@ import path from 'path'
 export default defineConfig({
   plugins: [
     vue(),
-    basicSsl()
+    basicSsl(),
   ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
-  }
+  },
+  base: 'dss-track-app-demo'
 })
