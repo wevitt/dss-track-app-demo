@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { computed, onMounted, ref } from 'vue'
+  import { Component, computed, onMounted, ref } from 'vue'
   import LoginForm from '@/components/LoginForm.vue'
   import Dashboard from '@/components/Dashboard.vue'
   const routes = {
@@ -8,18 +8,15 @@
   }
 
   const currentPath = ref(window.location.hash)
-  const currentView = computed(() => routes[currentPath.value.slice(1) || '/'])
+  const currentView = computed(() => {
+    const hash = currentPath.value.slice(1) || '/'
+    return (routes as any)[hash]
+  })
+
   onMounted(() => {
     window.addEventListener('hashchange', () => {
 		  currentPath.value = window.location.hash
 		})
-
-    window.setDSSCookie = (cname: string, cvalue: string, exdays = 1) => {
-      const d = new Date();
-      d.setTime(d.getTime() + (exdays*24*60*60*1000));
-      let expires = "expires="+ d.toUTCString();
-      document.cookie = cname + "=" + cvalue + ";" + expires;
-    }
   })
 </script>
 
