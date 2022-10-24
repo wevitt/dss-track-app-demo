@@ -12,7 +12,7 @@ const key = ref('')
 const api = useApi()
 
 const doLogin = async () => {
-  const loginData = await api.post('Auth/Login', {...credentials}).catch(e => console.log(e))
+  const loginData: any = await api.post('Auth/Login', {...credentials}).catch(e => console.log(e))
   console.log(loginData.data.Item.Token)
   if(loginData) {
     const { data: { Item: { Token }} } = loginData

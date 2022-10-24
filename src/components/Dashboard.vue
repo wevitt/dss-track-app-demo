@@ -12,7 +12,7 @@
     Drivers: Array<string>
     EnforceEscort: Boolean
     Escorts: Array<string>
-    Groups: Array<string>
+    Groups: Array<any>
     ID: string
     ID2: string
     ID3: void | string
@@ -22,7 +22,7 @@
   }
 
   const api = useApi()
-  const veichles = ref([])
+  const veichles = ref<Array<Veichle>>([])
 
   const getCookie = (cname: string): string =>  {
     let name = cname + "=";
