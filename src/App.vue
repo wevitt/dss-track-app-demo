@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { Component, computed, onMounted, ref } from 'vue'
+  import { computed, onMounted, ref } from 'vue'
   import LoginForm from '@/components/LoginForm.vue'
   import Dashboard from '@/components/Dashboard.vue'
   const routes = {

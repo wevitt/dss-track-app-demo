@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useApi } from '../composable/useApi'
 import { reactive, ref } from 'vue'
+import { AxiosResponse } from 'axios';
 
 const mode = ref('login') // login, request, reset
 const credentials = reactive({
@@ -11,10 +12,14 @@ const key = ref('')
 const api = useApi()
 
 const doLogin = async () => {
-  const loginData = await api.post('Auth/Login', {...credentials}, { headers: {}}).catch(e => console.log(e))
-  console.log(loginData)
-  window.history.pushState({}, '', '/dss-track-app-demo/#/dashboard')
-  window.dispatchEvent(new HashChangeEvent("hashchange"))
+  const loginData = await api.post('Auth/Login', {...credentials}).catch(e => console.log(e))
+  console.log(loginData.data.Item.Token)
+  if(loginData) {
+    const { data: { Item: { Token }} } = loginData
+    document.cookie = 'dss-token=' + Token
+    window.history.pushState({}, '', '/dss-track-app-demo/#/dashboard')
+    window.dispatchEvent(new HashChangeEvent("hashchange"))
+  }
 }
 
 const doResetRequest = async () => {
@@ -87,7 +92,7 @@ const doResetPassword = async () => {
           v-model="credentials.password"
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder="Nuova Password"
           autocomplete="current-password"
         >
       </div>
